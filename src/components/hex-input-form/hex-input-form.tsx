@@ -26,7 +26,7 @@ export function HexInputForm({ onSubmit }: HexInputFormProps) {
           minLength={4}
           maxLength={4}
         />
-        <FieldDescription>Enter a 4-digit hex code</FieldDescription>
+        <FieldDescription>Enter a 4-digit hex value</FieldDescription>
       </Field>
       <Button type="submit" className="cursor-pointer">
         Submit

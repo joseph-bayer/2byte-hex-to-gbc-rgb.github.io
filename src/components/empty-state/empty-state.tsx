@@ -16,7 +16,7 @@ export function EmptyState() {
         </EmptyMedia>
         <EmptyTitle>Awaiting Input...</EmptyTitle>
         <EmptyDescription>
-          Please provide a binary value to convert.
+          Please provide a hex value to convert.
         </EmptyDescription>
       </EmptyHeader>
     </Empty>
