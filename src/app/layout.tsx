@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider/theme-provider";
 import { DarkModeToggle } from "@/components/mode-toggle/dark-mode-toggle";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "@/components/footer/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="min-h-screen flex flex-col">
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>
