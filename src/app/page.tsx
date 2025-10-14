@@ -6,10 +6,11 @@ import { ModernHexToRgbConverter } from "@/components/modern-hex-to-gbc-rgb/mode
 
 import { TwoByteHexToRgbConverter } from "@/components/two-byte-hex-to-gbc-rgb/two-byte-hex-to-rgb-converter";
 import { ConverterTypes } from "@/constants/converter-types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function Home() {
+function HomeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -80,6 +81,62 @@ export default function Home() {
   }, [searchParams, router]);
 
   return (
+    <>
+      {/* Title & Converter Selector */}
+      <div className="flex flex-col gap-8">
+        <h1 className="text-6xl w-full text-center font-bold">
+          Pokecrystal RGB Converter
+        </h1>
+
+        <div className="w-full flex justify-center">
+          <ConverterSelector
+            value={selectedConverter.toString()}
+            onChange={handleConverterChange}
+          />
+        </div>
+      </div>
+
+      {/* Converter Forms */}
+      {selectedConverter === ConverterTypes.twoByteHex && (
+        <TwoByteHexToRgbConverter />
+      )}
+      {selectedConverter === ConverterTypes.modernHex && (
+        <ModernHexToRgbConverter />
+      )}
+    </>
+  );
+}
+
+function HomeContentSkeleton() {
+  return (
+    <>
+      <div className="flex flex-col gap-8">
+        <h1 className="text-6xl w-full text-center font-bold">
+          Pokecrystal RGB Converter
+        </h1>
+
+        {/* Dropdown Skeleton */}
+        <div className="w-full flex justify-center">
+          <Skeleton className="h-8 w-1/4" />
+        </div>
+      </div>
+
+      {/* Converter Title Skeleton */}
+      <div className="w-full flex justify-center">
+        <Skeleton className="h-9 w-1/3" />
+      </div>
+
+      {/* Cards Skeleton */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <Skeleton className="h-48 w-full" />
+        <Skeleton className="h-64 w-full" />
+      </div>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
     <div className="font-sans p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-16">
         {/* TODO: should probably be in layout */}
@@ -87,28 +144,9 @@ export default function Home() {
         <div className="flex w-full justify-end">
           <DarkModeToggle />
         </div>
-
-        {/* Title & Converter Selector */}
-        <div className="flex flex-col gap-8">
-          <h1 className="text-6xl w-full text-center font-bold">
-            Pokecrystal RGB Converter
-          </h1>
-
-          <div className="w-full flex justify-center">
-            <ConverterSelector
-              value={selectedConverter.toString()}
-              onChange={handleConverterChange}
-            />
-          </div>
-        </div>
-
-        {/* Converter Forms */}
-        {selectedConverter === ConverterTypes.twoByteHex && (
-          <TwoByteHexToRgbConverter />
-        )}
-        {selectedConverter === ConverterTypes.modernHex && (
-          <ModernHexToRgbConverter />
-        )}
+        <Suspense fallback={<HomeContentSkeleton />}>
+          <HomeContent />
+        </Suspense>
       </main>
     </div>
   );
