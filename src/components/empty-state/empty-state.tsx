@@ -7,7 +7,11 @@ import {
 } from "@/components/ui/empty";
 import { PaletteIcon } from "lucide-react";
 
-export function EmptyState() {
+interface EmptyStateProps {
+  description: string;
+}
+
+export function EmptyState({ description }: EmptyStateProps) {
   return (
     <Empty>
       <EmptyHeader>
@@ -15,9 +19,7 @@ export function EmptyState() {
           <PaletteIcon />
         </EmptyMedia>
         <EmptyTitle>Awaiting Input...</EmptyTitle>
-        <EmptyDescription>
-          Please provide a hex value to convert.
-        </EmptyDescription>
+        <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
     </Empty>
   );

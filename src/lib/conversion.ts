@@ -54,3 +54,16 @@ export function TwoByteHexToModernHex(hex: string): string {
 
   return `#${rHex}${gHex}${bHex}`.toUpperCase();
 }
+
+export function ModernHexToRGB555(hex: string): string {
+  const r8 = parseInt(hex.slice(0, 2), 16);
+  const g8 = parseInt(hex.slice(2, 4), 16);
+  const b8 = parseInt(hex.slice(4, 6), 16);
+
+  // Convert to RGB555
+  const r5 = Math.round(r8 * (31 / 255));
+  const g5 = Math.round(g8 * (31 / 255));
+  const b5 = Math.round(b8 * (31 / 255));
+
+  return `RGB ${r5}, ${g5}, ${b5}`;
+}

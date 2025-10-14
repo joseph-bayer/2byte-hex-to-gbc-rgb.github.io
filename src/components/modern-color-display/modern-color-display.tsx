@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 
 interface ModernColorDisplayProps {
-  hexValue: string;
+  twoByteHexValue: string;
 }
 
 export default function ModernColorDisplay({
-  hexValue,
+  twoByteHexValue,
 }: ModernColorDisplayProps) {
   const [rgb888, setRgb888] = useState<string>("");
   const [hex, setHex] = useState<string>("");
 
   useEffect(() => {
-    setRgb888(TwoByteHexToRGB888(hexValue));
-    setHex(TwoByteHexToModernHex(hexValue));
-  }, [hexValue]);
+    setRgb888(TwoByteHexToRGB888(twoByteHexValue));
+    setHex(TwoByteHexToModernHex(twoByteHexValue));
+  }, [twoByteHexValue]);
 
   return (
     <div className="flex flex-col gap-3">

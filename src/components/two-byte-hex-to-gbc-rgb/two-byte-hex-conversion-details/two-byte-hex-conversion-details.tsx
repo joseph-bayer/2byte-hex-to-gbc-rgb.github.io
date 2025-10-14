@@ -11,10 +11,12 @@ import {
 } from "@/lib/conversion";
 
 interface ConversionDetailsProps {
-  hexValue: string;
+  twoByteHexValue: string;
 }
 
-export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
+export function TwoByteHexConversionDetails({
+  twoByteHexValue,
+}: ConversionDetailsProps) {
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="details">
@@ -26,10 +28,10 @@ export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
             {/* Binary Value */}
             <div className="flex flex-col gap-3">
               <Label>
-                First, convert <strong>{hexValue}</strong> to binary
+                First, convert <strong>{twoByteHexValue}</strong> to binary
               </Label>
               <div className="text-muted-foreground font-mono">
-                {TwoByteHexToBinary(hexValue)}
+                {TwoByteHexToBinary(twoByteHexValue)}
               </div>
             </div>
 
@@ -40,7 +42,7 @@ export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
                 <span className="text-muted-foreground">( &lt;&lt; 1 )</span>
               </Label>
               <div className="text-muted-foreground font-mono">
-                {TwoByteHexToBinaryShifted(hexValue)}
+                {TwoByteHexToBinaryShifted(twoByteHexValue)}
               </div>
             </div>
 
@@ -52,22 +54,22 @@ export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
               <div className="flex flex-row gap-3">
                 {/* Blue */}
                 <span className="text-blue-500">
-                  {TwoByteHexToBinaryShifted(hexValue).slice(0, 5)}
+                  {TwoByteHexToBinaryShifted(twoByteHexValue).slice(0, 5)}
                 </span>
 
                 {/* Green */}
                 <span className="text-green-500">
-                  {TwoByteHexToBinaryShifted(hexValue).slice(5, 10)}
+                  {TwoByteHexToBinaryShifted(twoByteHexValue).slice(5, 10)}
                 </span>
 
                 {/* Red */}
                 <span className="text-red-500">
-                  {TwoByteHexToBinaryShifted(hexValue).slice(10, 15)}
+                  {TwoByteHexToBinaryShifted(twoByteHexValue).slice(10, 15)}
                 </span>
 
                 {/* Gray */}
                 <span className="text-gray-500">
-                  {TwoByteHexToBinaryShifted(hexValue).slice(15, 16)}
+                  {TwoByteHexToBinaryShifted(twoByteHexValue).slice(15, 16)}
                 </span>
               </div>
             </div>
@@ -80,7 +82,7 @@ export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
                   R:{" "}
                   <span className="text-red-500">
                     {parseInt(
-                      TwoByteHexToBinaryShifted(hexValue).slice(10, 15),
+                      TwoByteHexToBinaryShifted(twoByteHexValue).slice(10, 15),
                       2
                     )}
                   </span>
@@ -89,7 +91,7 @@ export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
                   G:{" "}
                   <span className="text-green-500">
                     {parseInt(
-                      TwoByteHexToBinaryShifted(hexValue).slice(5, 10),
+                      TwoByteHexToBinaryShifted(twoByteHexValue).slice(5, 10),
                       2
                     )}
                   </span>
@@ -98,7 +100,7 @@ export function ConversionDetails({ hexValue }: ConversionDetailsProps) {
                   B:{" "}
                   <span className="text-blue-500">
                     {parseInt(
-                      TwoByteHexToBinaryShifted(hexValue).slice(0, 5),
+                      TwoByteHexToBinaryShifted(twoByteHexValue).slice(0, 5),
                       2
                     )}
                   </span>

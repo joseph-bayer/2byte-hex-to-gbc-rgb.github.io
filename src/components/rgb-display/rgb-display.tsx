@@ -1,20 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { TwoByteHexToRGB555 } from "@/lib/conversion";
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 interface RgbDisplayProps {
-  hexValue: string;
+  RGBValue: string;
 }
 
-export function RgbDisplay({ hexValue }: RgbDisplayProps) {
+export function RgbDisplay({ RGBValue }: RgbDisplayProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(TwoByteHexToRGB555(hexValue));
+      await navigator.clipboard.writeText(RGBValue);
       setIsCopied(true);
       toast.success("RGB values copied to clipboard!");
 
@@ -32,9 +31,7 @@ export function RgbDisplay({ hexValue }: RgbDisplayProps) {
     <div className="flex flex-col gap-3">
       <Label className="text-lg">Results</Label>
       <div className="flex flex-row gap-3 items-center bg-background px-4 py-2 rounded-md w-fit">
-        <div className="text-muted-foreground">
-          {TwoByteHexToRGB555(hexValue)}
-        </div>
+        <div className="text-muted-foreground">{RGBValue}</div>
         <Button
           variant="ghost"
           size="sm"
