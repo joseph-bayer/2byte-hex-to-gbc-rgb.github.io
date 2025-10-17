@@ -2,6 +2,7 @@
 
 import ConverterSelector from "@/components/converter-selector/converter-selector";
 import { DarkModeToggle } from "@/components/mode-toggle/dark-mode-toggle";
+import { GitHubLink } from "@/components/github-link/github-link";
 import { ModernHexToRgbConverter } from "@/components/modern-hex-to-gbc-rgb/modern-hex-to-gbc-rgb";
 
 import { TwoByteHexToRgbConverter } from "@/components/two-byte-hex-to-gbc-rgb/two-byte-hex-to-rgb-converter";
@@ -140,9 +141,13 @@ export default function Home() {
     <div className="font-sans p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-16">
         {/* TODO: should probably be in layout */}
-        {/* Dark Mode Toggle */}
-        <div className="flex w-full justify-end">
+        {/* Top Right Controls */}
+        <div className="flex w-full justify-end gap-2">
           <DarkModeToggle />
+          <GitHubLink
+            username="joseph-bayer"
+            repository="2byte-hex-to-gbc-rgb.github.io"
+          />
         </div>
         <Suspense fallback={<HomeContentSkeleton />}>
           <HomeContent />
