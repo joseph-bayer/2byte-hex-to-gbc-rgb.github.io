@@ -3,7 +3,7 @@
 import ConverterSelector from "@/components/converter-selector/converter-selector";
 import { DarkModeToggle } from "@/components/mode-toggle/dark-mode-toggle";
 import { GitHubLink } from "@/components/github-link/github-link";
-import { ModernHexToRgbConverter } from "@/components/modern-hex-to-gbc-rgb/modern-hex-to-gbc-rgb";
+import { ModernHexToRgbConverter } from "@/components/modern-hex-to-gbc-rgb/modern-hex-to-gbc-rgb-converter";
 
 import { TwoByteHexToRgbConverter } from "@/components/two-byte-hex-to-gbc-rgb/two-byte-hex-to-rgb-converter";
 import { ConverterTypes } from "@/constants/converter-types";
@@ -97,13 +97,17 @@ function HomeContent() {
         </div>
       </div>
 
-      {/* Converter Forms */}
-      {selectedConverter === ConverterTypes.twoByteHex && (
-        <TwoByteHexToRgbConverter />
-      )}
-      {selectedConverter === ConverterTypes.modernHex && (
-        <ModernHexToRgbConverter />
-      )}
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-[100rem]">
+          {/* Converter Forms */}
+          {selectedConverter === ConverterTypes.twoByteHex && (
+            <TwoByteHexToRgbConverter />
+          )}
+          {selectedConverter === ConverterTypes.modernHex && (
+            <ModernHexToRgbConverter />
+          )}
+        </div>
+      </div>
     </>
   );
 }

@@ -29,14 +29,14 @@ export function ModernHexToRgbConverter() {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-16">
       {/* Header */}
       <h2 className="text-3xl w-full text-center">
         Modern Hex to Pokecrystal RGB
       </h2>
 
       {/* Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Hex Input */}
         <Card className="col-span-1 h-fit">
           <CardContent>
@@ -47,6 +47,6 @@ export function ModernHexToRgbConverter() {
         {/* Results */}
         <ModernHexResultsCard modernHexValue={modernHexValue} />
       </div>
-    </>
+    </div>
   );
 }
