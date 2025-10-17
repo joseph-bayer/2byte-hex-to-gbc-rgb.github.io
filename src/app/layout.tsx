@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pokecrystal RGB Converter",
   description: "A tool for converting colors to Pokecrystal RGB format",
+  verification: {
+    google: "MbxVXPzxNdTBT8fWCMWPHHbJPxsCbwErGsbBKUJK0vc",
+  },
 };
 
 export default function RootLayout({
