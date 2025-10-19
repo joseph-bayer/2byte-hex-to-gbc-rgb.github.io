@@ -5,6 +5,7 @@ import {
   SelectContent,
   SelectItem,
   SelectLabel,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -33,12 +34,24 @@ export default function ConverterSelector({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Converters</SelectLabel>
+            <SelectLabel>Convert To Pokecrystal RGB</SelectLabel>
             <SelectItem value={ConverterTypes.twoByteHex.toString()}>
               Two Byte Hex to Pokecrystal RGB
             </SelectItem>
             <SelectItem value={ConverterTypes.modernHex.toString()}>
               Modern Hex to Pokecrystal RGB
+            </SelectItem>
+          </SelectGroup>
+
+          <SelectSeparator />
+
+          <SelectGroup>
+            <SelectLabel>Convert From Pokecrystal RGB</SelectLabel>
+            <SelectItem value={ConverterTypes.gbcToTwoByteHex.toString()}>
+              GBC RGB to Two Byte Hex
+            </SelectItem>
+            <SelectItem value={ConverterTypes.gbcToModernHex.toString()}>
+              GBC RGB to Modern Hex
             </SelectItem>
           </SelectGroup>
         </SelectContent>

@@ -98,7 +98,7 @@ export function TwoByteHexInputForm({ onSubmit }: TwoByteHexInputFormProps) {
           )}
         />
         <Button type="submit" className="cursor-pointer">
-          Submit
+          Convert
         </Button>
       </form>
     </Form>

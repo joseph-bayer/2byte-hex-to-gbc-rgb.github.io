@@ -1,0 +1,82 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Card, CardContent } from "../ui/card";
+import { GBCRGBInputForm } from "../shared/gbc-rgb-input-form";
+import { GBCRGBToTwoByteHexResultsCard } from "./gbc-rgb-to-two-byte-hex-results-card/gbc-rgb-to-two-byte-hex-results-card";
+
+export function GBCRGBToTwoByteHexConverter() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [r, setR] = useState<number | null>(null);
+  const [g, setG] = useState<number | null>(null);
+  const [b, setB] = useState<number | null>(null);
+
+  // Initialize from URL params
+  useEffect(() => {
+    const rFromUrl = searchParams.get("r");
+    const gFromUrl = searchParams.get("g");
+    const bFromUrl = searchParams.get("b");
+
+    if (
+      rFromUrl &&
+      !isNaN(Number(rFromUrl)) &&
+      Number(rFromUrl) >= 0 &&
+      Number(rFromUrl) <= 31
+    ) {
+      setR(Number(rFromUrl));
+    }
+    if (
+      gFromUrl &&
+      !isNaN(Number(gFromUrl)) &&
+      Number(gFromUrl) >= 0 &&
+      Number(gFromUrl) <= 31
+    ) {
+      setG(Number(gFromUrl));
+    }
+    if (
+      bFromUrl &&
+      !isNaN(Number(bFromUrl)) &&
+      Number(bFromUrl) >= 0 &&
+      Number(bFromUrl) <= 31
+    ) {
+      setB(Number(bFromUrl));
+    }
+  }, [searchParams]);
+
+  const handleSubmit = (red: number, green: number, blue: number) => {
+    setR(red);
+    setG(green);
+    setB(blue);
+
+    // Update URL with the RGB values
+    const params = new URLSearchParams(searchParams);
+    params.set("r", red.toString());
+    params.set("g", green.toString());
+    params.set("b", blue.toString());
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
+  return (
+    <div className="flex flex-col gap-16">
+      {/* Header */}
+      <h2 className="text-3xl w-full text-center">
+        GBC RGB to Two Byte Hex Converter
+      </h2>
+
+      {/* Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        {/* RGB Input */}
+        <Card className="col-span-1 h-fit">
+          <CardContent>
+            <GBCRGBInputForm onSubmit={handleSubmit} />
+          </CardContent>
+        </Card>
+
+        {/* Results */}
+        <GBCRGBToTwoByteHexResultsCard r={r} g={g} b={b} />
+      </div>
+    </div>
+  );
+}

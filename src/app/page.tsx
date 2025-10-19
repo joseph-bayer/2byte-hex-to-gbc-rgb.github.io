@@ -4,8 +4,9 @@ import ConverterSelector from "@/components/converter-selector/converter-selecto
 import { DarkModeToggle } from "@/components/mode-toggle/dark-mode-toggle";
 import { GitHubLink } from "@/components/github-link/github-link";
 import { ModernHexToRgbConverter } from "@/components/modern-hex-to-gbc-rgb/modern-hex-to-gbc-rgb-converter";
-
 import { TwoByteHexToRgbConverter } from "@/components/two-byte-hex-to-gbc-rgb/two-byte-hex-to-rgb-converter";
+import { GBCRGBToTwoByteHexConverter } from "@/components/gbc-rgb-to-two-byte-hex/gbc-rgb-to-two-byte-hex-converter";
+import { GBCRGBToModernHexConverter } from "@/components/gbc-rgb-to-modern-hex/gbc-rgb-to-modern-hex-converter";
 import { ConverterTypes } from "@/constants/converter-types";
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -53,25 +54,58 @@ function HomeContent() {
 
         // Clear hex parameter if switching converter types and the hex format doesn't match
         const hexParam = searchParams.get("hex");
-        if (hexParam) {
+        const rParam = searchParams.get("r");
+        const gParam = searchParams.get("g");
+        const bParam = searchParams.get("b");
+
+        if (hexParam || rParam || gParam || bParam) {
           const params = new URLSearchParams(searchParams);
-          let shouldClear = false;
+          let shouldClearHex = false;
+          let shouldClearRgb = false;
 
           // Check if hex format matches the selected converter
           if (
             converterValue === ConverterTypes.twoByteHex &&
+            hexParam &&
             !/^[0-9A-Fa-f]{4}$/.test(hexParam)
           ) {
-            shouldClear = true;
+            shouldClearHex = true;
           } else if (
             converterValue === ConverterTypes.modernHex &&
+            hexParam &&
             !/^[0-9A-Fa-f]{6}$/.test(hexParam)
           ) {
-            shouldClear = true;
+            shouldClearHex = true;
           }
 
-          if (shouldClear) {
+          // Clear hex params when switching to RGB converters
+          if (
+            (converterValue === ConverterTypes.gbcToTwoByteHex ||
+              converterValue === ConverterTypes.gbcToModernHex) &&
+            hexParam
+          ) {
+            shouldClearHex = true;
+          }
+
+          // Clear RGB params when switching to hex converters
+          if (
+            (converterValue === ConverterTypes.twoByteHex ||
+              converterValue === ConverterTypes.modernHex) &&
+            (rParam || gParam || bParam)
+          ) {
+            shouldClearRgb = true;
+          }
+
+          if (shouldClearHex) {
             params.delete("hex");
+          }
+          if (shouldClearRgb) {
+            params.delete("r");
+            params.delete("g");
+            params.delete("b");
+          }
+
+          if (shouldClearHex || shouldClearRgb) {
             router.replace(`?${params.toString()}`, { scroll: false });
           }
         }
@@ -105,6 +139,12 @@ function HomeContent() {
           )}
           {selectedConverter === ConverterTypes.modernHex && (
             <ModernHexToRgbConverter />
+          )}
+          {selectedConverter === ConverterTypes.gbcToTwoByteHex && (
+            <GBCRGBToTwoByteHexConverter />
+          )}
+          {selectedConverter === ConverterTypes.gbcToModernHex && (
+            <GBCRGBToModernHexConverter />
           )}
         </div>
       </div>

@@ -4,18 +4,18 @@ import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-interface RgbDisplayProps {
-  RGBValue: string;
+interface CopyableTextProps {
+  textToCopy: string;
 }
 
-export function RgbDisplay({ RGBValue }: RgbDisplayProps) {
+export function CopyableText({ textToCopy }: CopyableTextProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(RGBValue);
+      await navigator.clipboard.writeText(textToCopy);
       setIsCopied(true);
-      toast.success("RGB values copied to clipboard!");
+      toast.success(`"${textToCopy}" copied to clipboard!`);
 
       // Reset the copied state after 2 seconds
       setTimeout(() => {
@@ -23,7 +23,7 @@ export function RgbDisplay({ RGBValue }: RgbDisplayProps) {
       }, 2000);
     } catch (err) {
       console.error("Failed to copy: ", err);
-      toast.error("Failed to copy RGB values");
+      toast.error("Failed to copy to clipboard.");
     }
   };
 
@@ -31,13 +31,13 @@ export function RgbDisplay({ RGBValue }: RgbDisplayProps) {
     <div className="flex flex-col gap-3">
       <Label className="text-lg">Results</Label>
       <div className="flex flex-row gap-3 items-center bg-background px-4 py-2 rounded-md w-fit">
-        <div className="text-muted-foreground">{RGBValue}</div>
+        <div className="text-muted-foreground">{textToCopy}</div>
         <Button
           variant="ghost"
           size="sm"
           onClick={copyToClipboard}
           className="h-8 w-8 p-1 cursor-pointer"
-          title={isCopied ? "Copied!" : "Copy RGB values"}
+          title={isCopied ? "Copied!" : `Copy "${textToCopy}" to clipboard`}
         >
           {isCopied ? (
             <Check className="h-3 w-3" />

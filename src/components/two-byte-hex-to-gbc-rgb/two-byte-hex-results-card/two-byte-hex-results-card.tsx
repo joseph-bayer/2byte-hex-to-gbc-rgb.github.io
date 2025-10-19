@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { RgbDisplay } from "../../rgb-display/rgb-display";
+import { CopyableText } from "../../copyable-text/copyable-text";
 import { TwoByteHexConversionDetails } from "../two-byte-hex-conversion-details/two-byte-hex-conversion-details";
 import { EmptyState } from "../../empty-state/empty-state";
 import ModernColorDisplay from "../../modern-color-display/modern-color-display";
@@ -17,11 +17,12 @@ export function TwoByteHexResultsCard({
       {!!twoByteHexValue?.length ? (
         <CardContent>
           <div className="flex flex-col gap-6">
-            <RgbDisplay RGBValue={TwoByteHexToRGB555(twoByteHexValue)} />
+            <CopyableText textToCopy={TwoByteHexToRGB555(twoByteHexValue)} />
             <TwoByteHexConversionDetails twoByteHexValue={twoByteHexValue} />
 
             <hr />
 
+            {/* Modern Color Formats */}
             <ModernColorDisplay twoByteHexValue={twoByteHexValue} />
           </div>
         </CardContent>

@@ -1,5 +1,6 @@
 import { EmptyState } from "@/components/empty-state/empty-state";
-import { RgbDisplay } from "@/components/rgb-display/rgb-display";
+import ModernColorDisplay from "@/components/modern-color-display/modern-color-display";
+import { CopyableText } from "@/components/copyable-text/copyable-text";
 import { Card, CardContent } from "@/components/ui/card";
 import { ModernHexToRGB555 } from "@/lib/conversion";
 
@@ -15,10 +16,12 @@ export function ModernHexResultsCard({
       {!!modernHexValue?.length ? (
         <CardContent>
           <div className="flex flex-col gap-6">
-            <RgbDisplay RGBValue={ModernHexToRGB555(modernHexValue)} />
-            {/* TODO: Conversion Details */}
-            {/* <hr /> */}
-            {/* TODO: Modern Color Display */}
+            <CopyableText textToCopy={ModernHexToRGB555(modernHexValue)} />
+
+            <hr />
+
+            {/* Modern Color Formats */}
+            <ModernColorDisplay modernHex={modernHexValue} />
           </div>
         </CardContent>
       ) : (
