@@ -34,7 +34,9 @@ export default function ConverterSelector({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Convert To Pokecrystal RGB</SelectLabel>
+            <SelectLabel>
+              Convert <i>To</i> Pokecrystal RGB
+            </SelectLabel>
             <SelectItem value={ConverterTypes.twoByteHexToGbcRgb.toString()}>
               Two Byte Hex to Pokecrystal RGB
             </SelectItem>
@@ -46,7 +48,9 @@ export default function ConverterSelector({
           <SelectSeparator />
 
           <SelectGroup>
-            <SelectLabel>Convert From Pokecrystal RGB</SelectLabel>
+            <SelectLabel>
+              Convert <i>From</i> Pokecrystal RGB
+            </SelectLabel>
             <SelectItem value={ConverterTypes.gbcToTwoByteHex.toString()}>
               GBC RGB to Two Byte Hex
             </SelectItem>
