@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent } from "../ui/card";
 import ModernHexInputForm from "./modern-hex-input-form/modern-hex-input-form";
 import { ModernHexResultsCard } from "./modern-hex-results-card/modern-hex-results-card";
+import { MoveRightIcon } from "lucide-react";
 
 export function ModernHexToRgbConverter() {
   const router = useRouter();
@@ -29,11 +30,14 @@ export function ModernHexToRgbConverter() {
   };
 
   return (
-    <div className="flex flex-col gap-16">
+    <section className="flex flex-col gap-16">
       {/* Header */}
-      <h2 className="text-3xl w-full text-center">
-        Modern Hex to Pokecrystal RGB
-      </h2>
+      <div className="w-full text-center flex flex-col gap-2">
+        <h2 className="text-3xl">Modern Hex to Pokecrystal RGB</h2>
+        <span className="text-muted-foreground flex flex-row gap-3 items-center justify-center">
+          e.g. #63FF5A <MoveRightIcon aria-label="to" /> RGB 12, 31, 11
+        </span>
+      </div>
 
       {/* Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -47,6 +51,6 @@ export function ModernHexToRgbConverter() {
         {/* Results */}
         <ModernHexResultsCard modernHexValue={modernHexValue} />
       </div>
-    </div>
+    </section>
   );
 }

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent } from "../ui/card";
 import { GBCRGBInputForm } from "../shared/gbc-rgb-input-form";
 import { GBCRGBToTwoByteHexResultsCard } from "./gbc-rgb-to-two-byte-hex-results-card/gbc-rgb-to-two-byte-hex-results-card";
+import { MoveRightIcon } from "lucide-react";
 
 export function GBCRGBToTwoByteHexConverter() {
   const router = useRouter();
@@ -59,11 +60,14 @@ export function GBCRGBToTwoByteHexConverter() {
   };
 
   return (
-    <div className="flex flex-col gap-16">
+    <section className="flex flex-col gap-16">
       {/* Header */}
-      <h2 className="text-3xl w-full text-center">
-        GBC RGB to Two Byte Hex Converter
-      </h2>
+      <div className="w-full text-center flex flex-col gap-2">
+        <h2 className="text-3xl">GBC RGB to Two Byte Hex Converter</h2>
+        <span className="text-muted-foreground flex flex-row gap-3 items-center justify-center">
+          e.g. RGB 12, 31, 11 <MoveRightIcon aria-label="to" /> 2FEC
+        </span>
+      </div>
 
       {/* Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -77,6 +81,6 @@ export function GBCRGBToTwoByteHexConverter() {
         {/* Results */}
         <GBCRGBToTwoByteHexResultsCard r={r} g={g} b={b} />
       </div>
-    </div>
+    </section>
   );
 }
