@@ -35,10 +35,10 @@ export default function ConverterSelector({
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Convert To Pokecrystal RGB</SelectLabel>
-            <SelectItem value={ConverterTypes.twoByteHex.toString()}>
+            <SelectItem value={ConverterTypes.twoByteHexToGbcRgb.toString()}>
               Two Byte Hex to Pokecrystal RGB
             </SelectItem>
-            <SelectItem value={ConverterTypes.modernHex.toString()}>
+            <SelectItem value={ConverterTypes.modernHexToGbcRgb.toString()}>
               Modern Hex to Pokecrystal RGB
             </SelectItem>
           </SelectGroup>

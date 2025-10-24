@@ -20,21 +20,21 @@ function HomeContent() {
   const getInitialConverter = () => {
     const converterParam = searchParams.get("converter");
     if (converterParam !== null) {
-      const converterValue = Number(converterParam);
+      const converterValue = converterParam;
       // Validate that it's a valid converter type
       if (Object.values(ConverterTypes).includes(converterValue)) {
         return converterValue;
       }
     }
-    return ConverterTypes.twoByteHex;
+    return ConverterTypes.twoByteHexToGbcRgb;
   };
 
   const [selectedConverter, setSelectedConverter] =
-    useState<number>(getInitialConverter);
+    useState<string>(getInitialConverter);
 
   // Update URL when converter changes
   const handleConverterChange = (value: string) => {
-    const converterValue = Number(value);
+    const converterValue = value;
     setSelectedConverter(converterValue);
 
     // Update URL with new converter parameter
@@ -47,7 +47,7 @@ function HomeContent() {
   useEffect(() => {
     const converterParam = searchParams.get("converter");
     if (converterParam !== null) {
-      const converterValue = Number(converterParam);
+      const converterValue = converterParam;
       // Validate that it's a valid converter type
       if (Object.values(ConverterTypes).includes(converterValue)) {
         setSelectedConverter(converterValue);
@@ -65,13 +65,13 @@ function HomeContent() {
 
           // Check if hex format matches the selected converter
           if (
-            converterValue === ConverterTypes.twoByteHex &&
+            converterValue === ConverterTypes.twoByteHexToGbcRgb &&
             hexParam &&
             !/^[0-9A-Fa-f]{4}$/.test(hexParam)
           ) {
             shouldClearHex = true;
           } else if (
-            converterValue === ConverterTypes.modernHex &&
+            converterValue === ConverterTypes.modernHexToGbcRgb &&
             hexParam &&
             !/^[0-9A-Fa-f]{6}$/.test(hexParam)
           ) {
@@ -89,8 +89,8 @@ function HomeContent() {
 
           // Clear RGB params when switching to hex converters
           if (
-            (converterValue === ConverterTypes.twoByteHex ||
-              converterValue === ConverterTypes.modernHex) &&
+            (converterValue === ConverterTypes.twoByteHexToGbcRgb ||
+              converterValue === ConverterTypes.modernHexToGbcRgb) &&
             (rParam || gParam || bParam)
           ) {
             shouldClearRgb = true;
@@ -112,7 +112,7 @@ function HomeContent() {
         return;
       }
     }
-    setSelectedConverter(ConverterTypes.twoByteHex);
+    setSelectedConverter(ConverterTypes.twoByteHexToGbcRgb);
   }, [searchParams, router]);
 
   return (
@@ -134,10 +134,10 @@ function HomeContent() {
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[100rem]">
           {/* Converter Forms */}
-          {selectedConverter === ConverterTypes.twoByteHex && (
+          {selectedConverter === ConverterTypes.twoByteHexToGbcRgb && (
             <TwoByteHexToRgbConverter />
           )}
-          {selectedConverter === ConverterTypes.modernHex && (
+          {selectedConverter === ConverterTypes.modernHexToGbcRgb && (
             <ModernHexToRgbConverter />
           )}
           {selectedConverter === ConverterTypes.gbcToTwoByteHex && (

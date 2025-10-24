@@ -1,6 +1,6 @@
 export const ConverterTypes = {
-  twoByteHex: 0,
-  modernHex: 1,
-  gbcToTwoByteHex: 2,
-  gbcToModernHex: 3,
+  twoByteHexToGbcRgb: "two-byte-hex-to-gbc-rgb",
+  modernHexToGbcRgb: "modern-hex-to-gbc-rgb",
+  gbcToTwoByteHex: "gbc-to-two-byte-hex",
+  gbcToModernHex: "gbc-to-modern-hex",
 };
