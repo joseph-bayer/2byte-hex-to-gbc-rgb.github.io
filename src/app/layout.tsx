@@ -17,7 +17,17 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Pokecrystal RGB Converter",
-  description: "A tool for converting colors to Pokecrystal RGB format",
+  description:
+    "A tool for converting colors to and from the Pokecrystal RGB format",
+  keywords: [
+    "Pokecrystal",
+    "RGB555",
+    "GBC RGB Converter",
+    "Rom Hack Tool",
+    "Joseph Bayer",
+    "Crystal Hacks",
+  ],
+  authors: [{ name: "Joseph Bayer", url: "https://github.com/joseph-bayer" }],
   verification: {
     google: "MbxVXPzxNdTBT8fWCMWPHHbJPxsCbwErGsbBKUJK0vc",
   },
