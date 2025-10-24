@@ -14,6 +14,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { XCircleIcon } from "lucide-react";
 
 // Define validation schema with exactly 4 characters and hex validation
 const formSchema = z.object({
@@ -81,14 +88,33 @@ export function TwoByteHexInputForm({ onSubmit }: TwoByteHexInputFormProps) {
             <FormItem>
               <FormLabel>Two Byte Hex</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="2FEC"
-                  {...field}
-                  onChange={(e) => {
-                    const cleanValue = handleInputChange(e.target.value);
-                    field.onChange(cleanValue);
-                  }}
-                />
+                <InputGroup>
+                  {/* Input */}
+                  <InputGroupInput
+                    placeholder="2FEC"
+                    {...field}
+                    onChange={(e) => {
+                      const cleanValue = handleInputChange(e.target.value);
+                      field.onChange(cleanValue);
+                    }}
+                  />
+
+                  {/* Clear button */}
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupButton
+                      aria-label="Clear"
+                      title="Clear"
+                      size="icon-xs"
+                      variant="link"
+                      className="ml-2 cursor-pointer text-muted-foreground hover:text-white"
+                      onClick={() => {
+                        form.setValue("twoByteHexInput", "");
+                      }}
+                    >
+                      <XCircleIcon />
+                    </InputGroupButton>
+                  </InputGroupAddon>
+                </InputGroup>
               </FormControl>
               <FormDescription>
                 Enter a 4-digit hex value (letters and numbers only)

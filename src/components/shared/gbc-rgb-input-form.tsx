@@ -16,8 +16,10 @@ import {
 import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
 } from "../ui/input-group";
+import { XCircleIcon } from "lucide-react";
 
 // Define validation schema for RGB string format
 const formSchema = z.object({
@@ -128,7 +130,10 @@ export function GBCRGBInputForm({ onSubmit }: GBCRGBInputFormProps) {
                 <FormLabel>GBC RGB Value</FormLabel>
                 <FormControl>
                   <InputGroup>
+                    {/*  "RGB" */}
                     <InputGroupAddon className="pr-3">RGB</InputGroupAddon>
+
+                    {/* Input */}
                     <InputGroupInput
                       {...field}
                       placeholder="12, 31, 11"
@@ -137,6 +142,22 @@ export function GBCRGBInputForm({ onSubmit }: GBCRGBInputFormProps) {
                         field.onChange(cleanValue);
                       }}
                     />
+
+                    {/* Clear button */}
+                    <InputGroupAddon align="inline-end">
+                      <InputGroupButton
+                        aria-label="Clear"
+                        title="Clear"
+                        size="icon-xs"
+                        variant="link"
+                        className="ml-2 cursor-pointer text-muted-foreground hover:text-white"
+                        onClick={() => {
+                          form.setValue("rgbInput", "");
+                        }}
+                      >
+                        <XCircleIcon />
+                      </InputGroupButton>
+                    </InputGroupAddon>
                   </InputGroup>
                 </FormControl>
                 <FormDescription>

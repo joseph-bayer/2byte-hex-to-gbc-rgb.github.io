@@ -16,9 +16,10 @@ import {
 import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { HashIcon } from "lucide-react";
+import { HashIcon, XCircleIcon } from "lucide-react";
 
 // Define validation schema with exactly 6 characters and hex validation
 const formSchema = z.object({
@@ -89,9 +90,12 @@ export default function ModernHexInputForm({
               <FormLabel>Hex Code</FormLabel>
               <FormControl>
                 <InputGroup>
+                  {/* # Symbol */}
                   <InputGroupAddon className="pr-3">
-                    <HashIcon />
+                    <HashIcon aria-hidden="true" />
                   </InputGroupAddon>
+
+                  {/* Input */}
                   <InputGroupInput
                     placeholder="63FF5A"
                     {...field}
@@ -100,6 +104,22 @@ export default function ModernHexInputForm({
                       field.onChange(cleanValue);
                     }}
                   />
+
+                  {/* Clear button */}
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupButton
+                      aria-label="Clear"
+                      title="Clear"
+                      size="icon-xs"
+                      variant="link"
+                      className="ml-2 cursor-pointer text-muted-foreground hover:text-white"
+                      onClick={() => {
+                        form.setValue("modernHexInput", "");
+                      }}
+                    >
+                      <XCircleIcon />
+                    </InputGroupButton>
+                  </InputGroupAddon>
                 </InputGroup>
               </FormControl>
               <FormDescription>Enter a 6-digit hex value</FormDescription>
